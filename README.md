@@ -1,2 +1,0 @@
-# ArtemPilipenko
-Racing Game Application
