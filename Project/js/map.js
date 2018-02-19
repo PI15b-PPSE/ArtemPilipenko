@@ -1,4 +1,6 @@
-﻿//сам канвас (логический)
+﻿
+
+//сам канвас (логический)
 var field=document.getElementById('canvas');
 //позволяет рисовать по канвасу
 var context = field.getContext('2d');
@@ -29,7 +31,7 @@ image_car.onload = function () {
  };
 
 
-//Координаты пространства, текущая и максимальная скорость автомобиля
+//данные игрока
 var x=0;
 var y=130;
 var speed=0;
@@ -37,13 +39,18 @@ var maxspeed=40;
 var lenght=0;
 var timer=0;
 
+//длина пути (пока не используется)
 var max_lenght=500;
 
+//данные опонента
 var x_op=0;
 var x_op_map=0;
 var speed_op=0;
 var maxspeed_op=30;
 var lenght_op=0;
+
+//переключение таймера
+var flag_timer=false;
 
 //Стили для отображения панели
 context.font='40px Verdana';
@@ -81,12 +88,53 @@ function draw_drive(){
 	context.fillText("Пиксели отрыва: "+ -Math.floor(x_op-x_op_map), 400, 700); 
 	context.fillText("Таймер: "+ timer, 900, 700);
 	
-	
-	if(-Math.floor(x_op-x_op_map)>0)
+	//Таймер
+	if(-Math.floor(x_op-x_op_map)>0 && flag_timer==true)
 		timer+=1;
-		else
-		timer=0;
-
+	else if (-Math.floor(x_op-x_op_map)<0 && flag_timer==false)
+		timer-=1;
+	else 
+	{
+		flag_timer=!flag_timer;
+			timer=0;
+	}
+	
+	
+	//Пути завершения игры
+	if(-Math.floor(x_op-x_op_map)>=5000)
+	{
+		context.fillStyle='#32CD32';
+		context.fillText("Вы выиграли по разнице пути!!!", 400, 400);
+		Window.stop();
+	}
+	if(-Math.floor(x_op-x_op_map)<=-5000)
+	{
+		context.fillStyle='#FF0000';
+		context.fillText("Вы проиграли по разнице пути!!!", 400, 400);
+		Window.stop();
+	}
+	if(timer>=500){
+		context.fillStyle='#32CD32';
+		context.fillText("Вы выиграли по таймеру!!!", 400, 400);
+		Window.stop();
+	}
+	if(timer<=-500){
+		context.fillStyle='#FF0000';
+		context.fillText("Вы проиграли по таймеру!!!", 400, 400);
+		Window.stop();
+	}
+	if(-Math.floor(x_op-x_op_map)>=5000 ||-Math.floor(x_op-x_op_map)<=-5000 || timer>=500 ||timer<=-500  )
+	{
+		x=0;
+		y=130;
+		speed=0;
+		x_op=0;
+		x_op_map=0;
+		speed_op=0;
+		lenght=0;
+		lenght_op=0;
+		Window.stop();
+	}
 };
 
 //функция с действиями для нажатых клавиш
@@ -117,3 +165,11 @@ speed+=2;
     }
 }
 window.onkeydown=moveCar;
+
+sound();
+
+function sound() {
+  var audio = new Audio(); // Создаём новый элемент Audio
+  audio.src = '../audio/map.mp3'; // Указываем путь к звуку "аудио"
+  audio.autoplay = true; // Автоматически запускаем
+}
