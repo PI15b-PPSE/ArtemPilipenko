@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Игровое поле</title>
+</head>
+<body>
+
+<!-- канвас, где будет отображаться игра-->
+<canvas id="canvas" width=1450 height=700 style="border: solid;"></canvas>
+
+<script type="text/javascript">
+
+//сам канвас (логический)
+var field=document.getElementById('canvas');
+//позволяет рисовать по канвасу
+var context = field.getContext('2d');
+
+
+ var image = new Image();
+ var image2 = new Image();
+ var image3 = new Image();
+ image.src = 'images/maps/map1.png';
+image2.src = 'images/maps/map1.png';
+image3.src = 'images/maps/map1.png';
+ 
+image.onload = function () {
+    context.drawImage(image,0, 0);
+	context.drawImage(image,500, 0);
+	context.drawImage(image,1000, 0);
+ };
+ 
+ var image_car = new Image();
+image_car.src = 'images/cars/1/car.png';
+
+image_car.onload = function () {
+    context.drawImage(image_car,0, 130);
+ };
+
+
+
+</script>
+</body>
+</html>>
