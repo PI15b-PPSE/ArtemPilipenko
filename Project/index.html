@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-
 <html>
 <head>
 	<title>Игровое поле</title>
@@ -10,85 +9,8 @@
 <!-- канвас, где будет отображаться игра-->
 <canvas id="canvas" width=1450 height=700 style="border: solid;"></canvas>
 
-<script type="text/javascript">
-
-//сам канвас (логический)
-var field=document.getElementById('canvas');
-//позволяет рисовать по канвасу
-var context = field.getContext('2d');
+<script language="javascript" src="map.js"  charset="UTF-8">
 
 
- var image = new Image();
- var image2 = new Image();
- var image3 = new Image();
- image.src = 'images/maps/map1.png';
-image2.src = 'images/maps/map1.png';
-image3.src = 'images/maps/map1.png';
- 
-image.onload = function () {
-    context.drawImage(image,0, 0);
-	context.drawImage(image,500, 0);
-	context.drawImage(image,1000, 0);
- };
- 
- var image_car = new Image();
-image_car.src = 'images/cars/1/car.png';
-
-image_car.onload = function () {
-    context.drawImage(image_car,0, 130);
- };
-
-var x=0;
-var y=130;
-var speed=0;
-var maxspeed=40;
-
-context.font='40px Verdana';
-context.fillStyle='#60016d';
- 
-
-var Game_loop=setInterval(function (){draw_drive(); x+=speed;}, 50);
-
-function draw_drive(){
-	if(speed!=0)
-		speed-=1;
- context.clearRect(0, 0, field.width, field.height);
-	context.drawImage(image,0-x, 0);
-	context.drawImage(image,500-x, 0);
-	context.drawImage(image,1000-x, 0);
-	 context.drawImage(image,1500-x, 0);
-	 context.drawImage(image_car,0, y);
-	if(x>=500)
-		x=0;
-	context.fillText("Скорость: "+ speed, 400, 600); 
-
-};
-
-function moveCar(e){
-
- switch(e.keyCode){
-        case 87:   // если нажата клавиша w
-				if(maxspeed>speed)
-                speed+=3;
-            break;
-			 case 65:   // если нажата клавиша a
-				if(y!=100 && speed!=0 && maxspeed>speed){
-                y+=-1;
-speed+=2;
-}
-            break;
-			 case 68:   // если нажата клавиша d
-
-				if(y!=300 && speed!=0 && maxspeed>speed){
-                y+=1;
-speed+=2;
-}
-            break;
-
-    }
-}
-window.onkeydown=moveCar;
-
-</script>
 </body>
 </html>>
