@@ -35,6 +35,7 @@ var y=130;
 var speed=0;
 var maxspeed=40;
 var lenght=0;
+var timer=0;
 
 var max_lenght=500;
 
@@ -65,18 +66,26 @@ function draw_drive(){
 	 
 	 lenght+=speed*0.01;
 	 
-	// lenght_op+=(speed+x_op-x_op_map)*0.01;
+	 lenght_op+=(speed+x_op_map)*0.001;
 	  context.drawImage(image_op,x_op-x_op_map, 300);
 	  
 	  while(speed_op<maxspeed_op)
 	  speed_op+=1;
-		//context.fillText("Скорость 2: "+ speed_op, 700, 600); 
-	//	context.fillText("Метраж 2: "+ lenght_op, 700, 650); 
+	  context.fillText("Скорость 2: "+ Math.floor(speed_op), 700, 600); 
+	  context.fillText("Метраж 2: "+ Math.floor(lenght_op), 700, 650); 
 
 	if(x>=500)
 		x=0;
 	context.fillText("Скорость: "+ speed, 400, 600); 
 	context.fillText("Метраж: "+ Math.floor(lenght), 400, 650); 
+	context.fillText("Время отрыва: "+ -Math.floor(x_op-x_op_map), 400, 700); 
+	context.fillText("Таймер: "+ timer, 900, 700);
+	
+	
+	if(-Math.floor(x_op-x_op_map)>0)
+		timer+=1;
+		else
+		timer=0;
 
 };
 
