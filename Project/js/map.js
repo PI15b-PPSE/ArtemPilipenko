@@ -7,9 +7,9 @@ var context = field.getContext('2d');
  var image = new Image();
  var image2 = new Image();
  var image3 = new Image();
- image.src = 'images/maps/map1.png';
-image2.src = 'images/maps/map1.png';
-image3.src = 'images/maps/map1.png';
+ image.src = '../images/maps/map1.png';
+image2.src = '../images/maps/map1.png';
+image3.src = '../images/maps/map1.png';
  
 image.onload = function () {
     context.drawImage(image,0, 0);
@@ -18,10 +18,10 @@ image.onload = function () {
  };
  
  var image_car = new Image();
-image_car.src = 'images/cars/1/car.png';
+image_car.src = '../images/cars/1/car.png';
 
  var image_op = new Image();
-image_op.src = 'images/cars/2/car.png';
+image_op.src = '../images/cars/2/car.png';
 
 image_car.onload = function () {
     context.drawImage(image_car,0, 130);
@@ -78,7 +78,7 @@ function draw_drive(){
 		x=0;
 	context.fillText("Скорость: "+ speed, 400, 600); 
 	context.fillText("Метраж: "+ Math.floor(lenght), 400, 650); 
-	context.fillText("Время отрыва: "+ -Math.floor(x_op-x_op_map), 400, 700); 
+	context.fillText("Пиксели отрыва: "+ -Math.floor(x_op-x_op_map), 400, 700); 
 	context.fillText("Таймер: "+ timer, 900, 700);
 	
 	
