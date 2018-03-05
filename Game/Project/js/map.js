@@ -36,9 +36,6 @@ var maxspeed=40;
 var lenght=0;
 var timer=0;
 
-//длина пути (пока не используется)
-var maxLenght=500;
-
 //данные опонента
 var xOp=0;
 var xOpMap=0;
@@ -83,12 +80,12 @@ function drawDrive(){
     while(speedOp<maxspeedOp)
         speedOp+=1;
     context.fillText("Скорость 2: "+ Math.floor(speedOp), 700, 600); 
-    context.fillText("Метраж 2: "+ Math.floor(lenghtOp), 700, 650); 
+    //context.fillText("Метраж 2: "+ Math.floor(lenghtOp), 700, 650); 
 
     if(x>=500)
         x=0;
     context.fillText("Скорость: "+ speed, fourHundred, 600); 
-    context.fillText("Метраж: "+ Math.floor(lenght), fourHundred, 650); 
+    //context.fillText("Метраж: "+ Math.floor(lenght), fourHundred, 650); 
     context.fillText("Пиксели отрыва: "+ -Math.floor(xOp-xOpMap), fourHundred, 700); 
     context.fillText("Таймер: "+ timer, 900, 700);
 	
@@ -156,14 +153,27 @@ function moveCar(e){
                 speed+=2;
             }
             break;
+        case 77:   // если нажата клавиша a 
+            if(on==0)
+            	on=1;
+            else on=0;
+            sound(on);
+            break;
     }
 }
 window.onkeydown=moveCar;
 
-sound();
+var on=1;
+var audio = new Audio(); // Создаём новый элемент Audio
 
-function sound() {
-    var audio = new Audio(); // Создаём новый элемент Audio
-    audio.src = '../audio/map.mp3'; // Указываем путь к звуку "аудио"
-    audio.autoplay = true; // Автоматически запускаем
+sound(on);
+
+function sound(a) {
+	if(a==1){
+        audio.src = '../audio/map.mp3'; // Указываем путь к звуку "аудио"
+        audio.autoplay = true; // Автоматически запускаем
+    }
+    else{
+    	audio.pause();
+    }
 }
