@@ -79,15 +79,15 @@ function drawDrive(){
 	  
     while(speedOp<maxspeedOp)
         speedOp+=1;
-    context.fillText("Скорость 2: "+ Math.floor(speedOp), 700, 600); 
+    context.fillText("Скорость соперника: "+ Math.floor(speedOp), oneThousand-50, 600); 
     //context.fillText("Метраж 2: "+ Math.floor(lenghtOp), 700, 650); 
 
     if(x>=500)
         x=0;
-    context.fillText("Скорость: "+ speed, fourHundred, 600); 
+    context.fillText("Скорость: "+ speed, 0, 600); 
     //context.fillText("Метраж: "+ Math.floor(lenght), fourHundred, 650); 
-    context.fillText("Пиксели отрыва: "+ -Math.floor(xOp-xOpMap), fourHundred, 700); 
-    context.fillText("Таймер: "+ timer, 900, 700);
+    context.fillText("Пиксели отрыва: "+ -Math.floor(xOp-xOpMap), fourHundred-100, 700); 
+    context.fillText("Таймер: "+ timer, oneThousand-200, 700);
 	
 	//Таймер
     if(-Math.floor(xOp-xOpMap)>0 && flagTimer==true)
