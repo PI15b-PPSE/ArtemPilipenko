@@ -12,11 +12,11 @@ var standartYG=80;
 //гараж
 var image = new Image();
 image.src = '../images/maps/garage.jpg';
- 
+
 image.onload = function () {
     context.drawImage(image, standartXG, standartYG);
 };
- 
+
 var imageCar = new Image();
 imageCar.src = '../images/cars/1/car.png';
 
@@ -32,8 +32,8 @@ cars.lenght=8;
 var curr=0;
 
 //заполнение адресами автомобилей
-for(i=0;i<cars.lenght;i++)
-	cars[i]="../images/cars/"+(i+1)+"/car.png";
+for(i=0; i<cars.lenght; i++)
+    cars[i]="../images/cars/"+(i+1)+"/car.png";
 
 //добавление информации для пользователя
 context.font = '20px Arial';
@@ -42,13 +42,13 @@ context.fillText("Для изменения автомобиля, нажимай
 context.fillText("Для включения/отключения фоновой музыки, нажимайте: m", standartXG+30,70);
 
 //функция с действиями для нажатых клавиш
-function moveCar(e){
-    switch(e.keyCode){
-        case 87:   // если нажата клавиша w
-            if(curr<cars.lenght-1){
-            	var audioCar = new Audio();
-            	audioCar.src = '../audio/garage_change_car.mp3';
-            	audioCar.autoplay = true;
+function moveCar(e) {
+    switch(e.keyCode) {
+        case 87: // если нажата клавиша w
+            if(curr<cars.lenght-1) {
+                var audioCar = new Audio();
+                audioCar.src = '../audio/garage_change_car.mp3';
+                audioCar.autoplay = true;
                 curr++;
                 context.clearRect(0, 0, field.width, field.height);
                 imageCar.src = cars[curr];
@@ -58,11 +58,11 @@ function moveCar(e){
                 context.fillText("Для включения/отключения фоновой музыки, нажимайте: m", standartXG+30,70);
             }
             break;
-        case 83:   // если нажата клавиша s
-            if(curr>0){
-            	var audioCar = new Audio();
-            	audioCar.src = '../audio/garage_change_car.mp3';
-            	audioCar.autoplay = true; 
+        case 83: // если нажата клавиша s
+            if(curr>0) {
+                var audioCar = new Audio();
+                audioCar.src = '../audio/garage_change_car.mp3';
+                audioCar.autoplay = true; 
                 curr--;
                 context.clearRect(0, 0, field.width, field.height);
                 imageCar.src = cars[curr];
@@ -73,12 +73,10 @@ function moveCar(e){
             }
             break;
         case 77: //если нажата клавиша m
-            {
-            	//изменение состояние воспроизведения музыки
-            	if(on==1) on=0;
-            	else on=1;
+                //изменение состояние воспроизведения музыки
+                if(on==1) on=0;
+                else on=1;
                 sound(on);
-            }
     }
     context.font = '20px Arial';
     context.fillStyle='#FF0000';
@@ -88,18 +86,16 @@ window.onkeydown=moveCar;
 //состояние воспроизведения фоновой музыки
 var on=1;
 
-
 var audio = new Audio(); // Создаём новый элемент Audio
 //включение воспроиведение музыки
 sound(on);
 
 function sound(a) {
-	if(a==1){
-    	audio.src = '../audio/garage.mp3'; // Указываем путь к звуку "аудио"
-    	audio.autoplay = true; // Автоматически запускаем
-	}
-	else{
+    if(a==1) {
+        audio.src = '../audio/garage.mp3'; // Указываем путь к звуку "аудио"
+        audio.autoplay = true; // Автоматически запускаем
+    }
+    else {
         audio.pause();
-	}
+    }
 }
-   
