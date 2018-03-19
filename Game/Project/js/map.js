@@ -9,13 +9,13 @@ var image3 = new Image();
 image.src = '../images/maps/map1.png';
 image2.src = '../images/maps/map1.png';
 image3.src = '../images/maps/map1.png';
- 
+
 image.onload = function () {
     context.drawImage(image, 0, 0);
     context.drawImage(image, 500, 0);
     context.drawImage(image, 1000, 0);
 };
- 
+
 var imageCar = new Image();
 imageCar.src = '../images/cars/1/car.png';
 
@@ -56,27 +56,26 @@ var flagTimer=false;
 //Стили для отображения панели
 context.font='40px Verdana';
 context.fillStyle='#60016d';
- 
+
 //Каждые 50 милисекунд выполняется данная функция
-var gameLoop=setInterval(function (){drawDrive(); x+=speed;xOpMap+=speed;xOp+=speedOp}, 50);
+var gameLoop=setInterval(function () {drawDrive(); x+=speed; xOpMap+=speed; xOp+=speedOp}, 50);
 
 //функция передвижения автомобиля
-function drawDrive(){
+function drawDrive() {
     if(speed!=0)
         speed-=1;
-		
+
     context.clearRect(0, 0, field.width, field.height);
     context.drawImage(image,0-x, 0);
     context.drawImage(image,fiveHundred-x, 0);
     context.drawImage(image,oneThousand-x, 0);
     context.drawImage(image,oneThousandFiveHundred-x, 0);
     context.drawImage(imageCar,0, y);
-	 
-    lenght+=speed*0.01;
-	 
+
+    lenght+=speed*0.01; 
     lenghtOp+=(speed+xOpMap)*0.001;
-        context.drawImage(imageOp, xOp-xOpMap, 300);
-	  
+    context.drawImage(imageOp, xOp-xOpMap, 300);
+
     while(speedOp<maxspeedOp)
         speedOp+=1;
     context.fillText("Скорость 2: "+ Math.floor(speedOp), 700, 600); 
@@ -88,8 +87,8 @@ function drawDrive(){
     //context.fillText("Метраж: "+ Math.floor(lenght), fourHundred, 650); 
     context.fillText("Пиксели отрыва: "+ -Math.floor(xOp-xOpMap), fourHundred, 700); 
     context.fillText("Таймер: "+ timer, 900, 700);
-	
-	//Таймер
+
+    //Таймер
     if(-Math.floor(xOp-xOpMap)>0 && flagTimer==true)
         timer+=1;
     else if (-Math.floor(xOp-xOpMap)<0 && flagTimer==false)
@@ -98,29 +97,29 @@ function drawDrive(){
         flagTimer=!flagTimer;
         timer=0;
     }
-	
-	//Пути завершения игры
+
+    //Пути завершения игры
     if(-Math.floor(xOp-xOpMap)>=fiveThousand) {
         context.fillStyle='#32CD32';
         context.fillText("Вы выиграли по разнице пути!!!", fourHundred, fourHundred);
         Window.stop();
-	}
+    }
     if(-Math.floor(xOp-xOpMap)<=-fiveThousand) {
         context.fillStyle='#FF0000';
         context.fillText("Вы проиграли по разнице пути!!!", fourHundred, fourHundred);
         Window.stop();
-	}
-	if(timer>=fiveHundred){
+    }
+    if(timer>=fiveHundred) {
         context.fillStyle='#32CD32';
         context.fillText("Вы выиграли по таймеру!!!", fourHundred, fourHundred);
         Window.stop();
     }
-	if(timer<=-fiveHundred){
+    if(timer<=-fiveHundred) {
         context.fillStyle='#FF0000';
         context.fillText("Вы проиграли по таймеру!!!", fourHundred, fourHundred);
         Window.stop();
     }
-	if(-Math.floor(xOp-xOpMap)>=fiveThousand ||-Math.floor(xOp-xOpMap)<=-fiveThousand || timer>=fiveHundred ||timer<=-fiveHundred) {
+    if(-Math.floor(xOp-xOpMap)>=fiveThousand ||-Math.floor(xOp-xOpMap)<=-fiveThousand || timer>=fiveHundred ||timer<=-fiveHundred) {
         x=0;
         y=130;
         speed=0;
@@ -134,7 +133,7 @@ function drawDrive(){
 };
 
 //функция с действиями для нажатых клавиш
-function moveCar(e){
+function moveCar(e) {
     switch(e.keyCode){
         case 87:   // если нажата клавиша w
             if(maxspeed>speed){
@@ -155,7 +154,7 @@ function moveCar(e){
             break;
         case 77:   // если нажата клавиша a 
             if(on==0)
-            	on=1;
+                on=1;
             else on=0;
             sound(on);
             break;
@@ -169,11 +168,11 @@ var audio = new Audio(); // Создаём новый элемент Audio
 sound(on);
 
 function sound(a) {
-	if(a==1){
+    if(a==1) {
         audio.src = '../audio/map.mp3'; // Указываем путь к звуку "аудио"
         audio.autoplay = true; // Автоматически запускаем
     }
-    else{
-    	audio.pause();
+    else {
+        audio.pause();
     }
 }
