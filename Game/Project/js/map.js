@@ -17,10 +17,10 @@ image.onload = function () {
 };
 
 var imageCar = new Image();
-imageCar.src = '../images/cars/1/car.png';
+imageCar.src = '../images/cars/3/car.png';
 
 var imageOp = new Image();
-imageOp.src = '../images/cars/2/car.png';
+imageOp.src = '../images/cars/5/car.png';
 
 imageCar.onload = function () {
     context.drawImage(imageCar, 0, 130);
@@ -102,22 +102,22 @@ function drawDrive() {
     //Пути завершения игры
     if(-Math.floor(xOp-xOpMap)>=fiveThousand) {
         context.fillStyle='#32CD32';
-        context.fillText("Вы выиграли по разнице пути!!!", fourHundred, fourHundred);
+        context.fillText("Победа!!!Разница пути", fourHundred, fourHundred);
         Window.stop();
     }
     if(-Math.floor(xOp-xOpMap)<=-fiveThousand) {
         context.fillStyle='#FF0000';
-        context.fillText("Вы проиграли по разнице пути!!!", fourHundred, fourHundred);
+        context.fillText("Поражение!!!Разница пути", fourHundred, fourHundred);
         Window.stop();
     }
     if(timer>=fiveHundred) {
         context.fillStyle='#32CD32';
-        context.fillText("Вы выиграли по таймеру!!!", fourHundred, fourHundred);
+        context.fillText("Победа!!!Обошёл по таймеру", fourHundred, fourHundred);
         Window.stop();
     }
     if(timer<=-fiveHundred) {
         context.fillStyle='#FF0000';
-        context.fillText("Вы проиграли по таймеру!!!", fourHundred, fourHundred);
+        context.fillText("Поражение!!!Проиграл по таймеру", fourHundred, fourHundred);
         Window.stop();
     }
     if(-Math.floor(xOp-xOpMap)>=fiveThousand ||-Math.floor(xOp-xOpMap)<=-fiveThousand || timer>=fiveHundred ||timer<=-fiveHundred) {
