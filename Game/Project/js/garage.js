@@ -6,7 +6,7 @@
 * canvas с документа html. Дополнительная
 * детализация не нужна
 *
-* @var canvas $field
+* @var object field
 */
 var field=document.getElementById('canvas');
 
@@ -17,7 +17,7 @@ var field=document.getElementById('canvas');
 * в 2d режиме. Дполнительная
 * детализация не нужна
 *
-* @var context $context
+* @var object context
 */
 var context = field.getContext('2d');
 
@@ -31,7 +31,7 @@ var context = field.getContext('2d');
 * Дополнительная детализация
 * не нужна
 *
-* @var float $standartX
+* @var object standartX
 */
 var standartX=600;
 /**
@@ -42,7 +42,7 @@ var standartX=600;
 * Дополнительная детализация
 * не нужна
 *
-* @var float $standartY
+* @var object standartY
 */
 var standartY=300;
 /**
@@ -53,7 +53,7 @@ var standartY=300;
 * Дополнительная детализация
 * не нужна
 *
-* @var float $standartXG
+* @var object standartXG
 */
 var standartXG=400;
 /**
@@ -64,7 +64,7 @@ var standartXG=400;
 * Дополнительная детализация
 * не нужна
 *
-* @var float $standartYG
+* @var object standartYG
 */
 var standartYG=80;
 
@@ -76,21 +76,19 @@ var standartYG=80;
 * на канвас. Дополнительная
 * детализация не нужна
 *
-* @var image $image
+* @var object image
 */
 var image = new Image();
-/**
-* Ресурс изображения image
-*
-* Позволяет загрузить
-* указанное изображение в image.
-* Дополнительная
-* детализация не нужна
-*
-* @var String $src
-*/
 image.src = '../images/maps/garage.jpg';
 
+/**
+* Работа со свойством image, standartXG, standartYG
+*
+* Если аргументы определены, то устанавливается новое
+* значения свойства image.onload.
+*  
+* @return void Ничего не возвращает
+*/
 image.onload = function () {
     context.drawImage(image, standartXG, standartYG);
 };
@@ -103,7 +101,7 @@ image.onload = function () {
 * на канвас. Дополнительная
 * детализация не нужна
 *
-* @var image $imageCar
+* @var object imageCar
 */
 var imageCar = new Image();
 imageCar.src = '../images/cars/1/car.png';
@@ -120,19 +118,9 @@ imageCar.onload = function () {
 * Дополнительная
 * детализация не нужна
 *
-* @var $cars
+* @var object cars
 */
 var cars = new Array();
-/**
-* Количество автомобилей (свойство объекта cars)
-*
-* Содержит количество возможных
-* автомобилей в программе.
-* Дополнительная
-* детализация не нужна
-*
-* @var int $lenght
-*/
 cars.lenght=8;
 /**
 * Номер текущего автомобиля
@@ -142,37 +130,18 @@ cars.lenght=8;
 * Дополнительная
 * детализация не нужна
 *
-* @var int $curr
+* @var object curr
 */
 var curr=0;
 
 //заполнение адресами автомобилей
-for(i=0; i<cars.lenght; i++)
+for(i=0; i<cars.lenght; i++) {
     cars[i]="../images/cars/"+(i+1)+"/car.png";
+}
 
 //добавление информации для пользователя
 context.font = '20px Arial';
- /**
- * Стиль объекта context
- *
- * Позволяет установить
- * указанный цвет в context.
- * Дополнительная
- * детализация не нужна
- *
- * @var String $fillStyle
- */
 context.fillStyle='#FF0000';
- /**
- * Текст объекта context
- *
- * Позволяет установить
- * указанный текст в context.
- * Дополнительная
- * детализация не нужна
- *
- * @var $fillText
- */
 context.fillText("Для изменения автомобиля, нажимайте: w-вперёд, s- назад", standartXG+30,40);
 context.fillText("Для включения/отключения фоновой музыки, нажимайте: m", standartXG+30,70);
 
@@ -185,13 +154,21 @@ context.fillText("Для включения/отключения фоновой 
 * значения свойств curr, context, imageCar, on.
 *  
 * @param event e Событие нажатия клавиши
-* @return mixed Возвращает текущее значение
-* свойств.
+* @return void Ничего не возвращает
 */
 function moveCar(e) {
     switch(e.keyCode) {
         case 87: // если нажата клавиша w
-            if(curr<cars.lenght-1) {
+            if(curr<cars.lenght-1) { 
+                /**
+                * Коспонент audio для звука двигателя автомобиля
+                *
+                * Позволяет загрузить
+                * звук дигателя автомобиля и его
+                * воспроизвести
+                *
+                * @var object audioCar
+                */
                 var audioCar = new Audio();
                 audioCar.src = '../audio/garage_change_car.mp3';
                 audioCar.autoplay = true;
@@ -227,17 +204,6 @@ function moveCar(e) {
     context.font = '20px Arial';
     context.fillStyle='#FF0000';
 }
-
- /**
- * Свойство установки события нажатия клавиши
- *
- * Позволяет установить
- * функцию, отвечающую за нажатие клавиш.
- * Дополнительная
- * детализация не нужна
- *
- * @var $onkeydown
- */
 window.onkeydown=moveCar;
 
 /**
@@ -248,7 +214,7 @@ window.onkeydown=moveCar;
 * Дополнительная детализация
 * не нужна
 *
-* @var float $on
+* @var object on
 */
 var on=1;
 
@@ -259,7 +225,7 @@ var on=1;
 * Дополнительная детализация
 * не нужна
 *
-* @var audio $audio
+* @var object audio
 */
 var audio = new Audio(); // Создаём новый элемент Audio
 //включение воспроиведение музыки
@@ -274,7 +240,7 @@ sound(on);
 * значения свойства audio.
 *  
 * @param float a Состояние воспроизведения музыки
-* @return mixed Возвращает текущее значение
+* @return void Ничего не возвращает
 * свойств.
 */
 function sound(a) {

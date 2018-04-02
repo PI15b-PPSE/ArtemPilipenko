@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="styles.css"?>
+<book xml:id="simple_book" xmlns="http://docbook.org/ns/docbook" version="5.0">
+    <info><title>Документация к проекту "Car Racing Application (CRA)"</title>
+    <author><personname><firstname>Артём</firstname>
+        <surname>Пилипенко</surname></personname></author>
+    <copyright><year>2018</year><holder>Артём Пилипенко</holder></copyright></info>
+    <preface><title>Преамбула</title><address>ArtemPilipenko5@gmail.com</address></preface>
+    <chapter xml:id="chapter_1">
+        <title>Игры, как часть современного мира</title>
+        <para>Среди людей старшего поколения, и особенно среди женщин, существует расхожее мнение, что компьютерные игры вредны - либо для психики, либо для зрения, или для умственного развития.     </para>
+        <para>Компьютерные игры растят гениев. Почти все мамы и бабушки, растящие детей и подростков, уверены, что игры – пустое времяпровождение, от которого люди глупеют и становятся агрессивнее.</para>
+        <para>Между тем практически все современные исследования доказывают, что это далеко не так.</para>
+        <para>Даже наоборот - компьютерные игры полезны. Они развивают логическое мышление, наблюдательность, повышают скорость принятия решения, в том числе в критических ситуациях.</para>
+        <para>Развивают умение обрабатывать в голове массивы информации.</para>
+        <para>Данная игра не является исключением и приносит только опыт, однако также потерю времени.</para>
+    </chapter>
+    <chapter xml:id="chapter_2">
+        <title>Горячик клавиши</title>
+        <para>Клавиша "w" - движение вперёд (набор скорости до максимальной)</para>
+        <para>Клавиша "s" - движение вназад (сброс скорости до 0)</para>
+        <para>Клавиша "a" - движение налево</para>
+        <para>Клавиша "d" - движение направо</para>
+        <para>Клавиша "m" - включение/отключение фоновой музыки</para>
+    </chapter>
+    <chapter xml:id="chapter_3">
+        <title>Сценарии игры</title>
+        <para>Игра предоставляет различные сценарии завершения гонки.</para>
+        <section>
+            <title>Случайные окончания игры</title>
+        <para>Игрок вышел за карту.</para>
+            <example><title>Сошёл с трассы</title>
+                <programlisting>
+                    <![CDATA[ 
+        javascript
+        if(y<65 || y>320) {
+            context.fillStyle='#FF0000';
+            context.fillText(messages[10], fourHundred, fourHundred);
+            speed=0;
+            xOpMap=0;
+            speedOp=0;
+            Window.stop();
+        }]]>
+            </programlisting>
+            </example>
+            <para>Игрок столкнулся с оппонентом.</para>
+            <example><title>Произошло столкновение</title>
+                <programlisting>
+                    <![CDATA[ 
+        javascript
+        if(Math.abs(xspeed-xOpspeed)<=155  && Math.abs(y-yOpMap)<=30) {
+            context.fillStyle='#FF0000';
+            context.fillText(messages[11], fourHundred, fourHundred);
+            speed=0;
+            xOpMap=0;
+            speedOp=0;
+            Window.stop();
+        }]]>
+            </programlisting>
+            </example>
+        </section>
+        <section>
+            <title>Окончания игры с победой или поражением</title>
+            <para>Пройдена длина игрока или оппонента 100000 пикселей.</para>
+            <example><title>Закончен спринт</title>
+                <programlisting>
+                    <![CDATA[ 
+        javascript
+        if(xspeed>=100000) {
+            context.fillStyle='#32CD32';
+            context.fillText(messages[8], fourHundred, fourHundred);
+            Window.stop();
+        }
+        if(xOpspeed>=100000) {
+            context.fillStyle='#32CD32';
+            context.fillText(messages[9], fourHundred, fourHundred);
+            Window.stop();
+        }]]>
+            </programlisting>
+            </example>
+            <para>Игрок или оппонент долго не менялись местами в лидерстве.</para>
+            <example><title>Проиграл по таймеру</title>
+                <programlisting>
+                    <![CDATA[ 
+        javascript
+        if(timer>=fiveHundred) {
+            context.fillStyle='#32CD32';
+            context.fillText(messages[6], fourHundred, fourHundred);
+            Window.stop();
+        }
+        if(timer<=-fiveHundred) {
+            context.fillStyle='#FF0000';
+            context.fillText(messages[7], fourHundred, fourHundred);
+            Window.stop();
+        }]]>
+            </programlisting>
+            </example>
+            <para>Игрок или оппонент сильно вышел вперёд и создал большую разницу пути.</para>
+            <example><title>Проиграл по разнице пути</title>
+                <programlisting>
+                    <![CDATA[ 
+        javascript
+        if(-Math.floor(xOp-xOpMap)>=fiveThousand) {
+            context.fillStyle='#32CD32';
+            context.fillText(messages[4], fourHundred, fourHundred);
+            Window.stop();
+        }
+        if(-Math.floor(xOp-xOpMap)<=-fiveThousand) {
+            context.fillStyle='#FF0000';
+            context.fillText(messages[5], fourHundred, fourHundred);
+            Window.stop();
+        }]]>
+            </programlisting>
+            </example>
+    </section>
+    </chapter>
+    <chapter xml:id="chapter_4">
+        <title>Примеры работы программы</title>
+        <figure>
+            <title>Один из вариантов старта</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="1.png"
+                        format="PNG" />
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <figure>
+            <title>Ещё один из вариантов старта</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="2.png"
+                        format="PNG" />
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <figure>
+            <title>Ещё один из вариантов старта</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="3.png"
+                        format="PNG" />
+                </imageobject>
+            </mediaobject>
+        </figure>
+        <figure>
+            <title>Один из вариантов поражения</title>
+            <mediaobject>
+                <imageobject>
+                    <imagedata fileref="4.png"
+                        format="PNG" />
+                </imageobject>
+            </mediaobject>
+        </figure>
+        
+    </chapter>
+</book>
